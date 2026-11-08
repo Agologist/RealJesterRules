@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&display=swap');
+@import "tailwindcss";
+@import "tailwindcss-safe-area";
+
+@theme {
+  --text-xs: 12px;
+  --text-xs--line-height: 16px;
+  --text-sm: 14px;
+  --text-sm--line-height: 20px;
+  --text-base: 16px;
+  --text-base--line-height: 24px;
+  --text-lg: 18px;
+  --text-lg--line-height: 28px;
+  --text-xl: 20px;
+  --text-xl--line-height: 28px;
+  --text-2xl: 24px;
+  --text-2xl--line-height: 32px;
+  --text-3xl: 30px;
+  --text-3xl--line-height: 36px;
+  --text-4xl: 36px;
+  --text-4xl--line-height: 40px;
+  --text-5xl: 48px;
+  --text-5xl--line-height: 52px;
+  --font-display: "Cinzel", "Times New Roman", serif;
+}
+
+:root {
+  color-scheme: dark;
+  --bg: #0c0a08;
+  --surface: #171310;
+  --surface-2: #201a14;
+  --text: #f5efe0;
+  --dim: #a2937a;
+  --border: #3a2f1e;
+  --accent: #c9a227;
+  --accent-bright: #f0d060;
+  --felt: #12291d;
+  --felt-edge: #0a1a12;
+  --gold-grad: linear-gradient(160deg, #f0d060, #c9a227 55%, #8a6d14);
+  --radius: 12px;
+  --space-surface: var(--surface);
+  --space-surface-alt: var(--surface-2);
+  --space-muted: var(--dim);
+  --space-border: var(--border);
+  --space-accent: var(--accent);
+}
+
+/* The artifact is a dark casino table in both system modes. */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #0c0a08;
+    --surface: #171310;
+    --text: #f5efe0;
+    --dim: #a2937a;
+    --border: #3a2f1e;
+    --accent: #c9a227;
+  }
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* ---- card motion ---- */
+@keyframes dealIn {
+  from {
+    opacity: 0;
+    transform: translateY(-26px) scale(0.7) rotate(-6deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+.deal-in {
+  animation: dealIn 0.38s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+
+@keyframes flipIn {
+  from {
+    transform: rotateY(90deg) scale(0.92);
+    opacity: 0.4;
+  }
+  to {
+    transform: rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+}
+.flip-in {
+  animation: flipIn 0.32s ease-out both;
+}
+
+@keyframes placeDown {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.place-down {
+  animation: placeDown 0.25s ease-out both;
+}
+
+@keyframes bannerPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.82);
+    letter-spacing: 0.4em;
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    letter-spacing: 0.14em;
+  }
+}
+.banner-pop {
+  animation: bannerPop 0.55s cubic-bezier(0.2, 0.9, 0.3, 1.15) both;
+}
+
+@keyframes scoreTick {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.35);
+    color: var(--accent-bright);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.score-tick {
+  animation: scoreTick 0.35s ease-out;
+}
+
+@keyframes winnerGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 2px var(--accent-bright), 0 0 18px 2px rgba(240, 208, 96, 0.55);
+  }
+  50% {
+    box-shadow: 0 0 0 2px var(--accent-bright), 0 0 30px 8px rgba(240, 208, 96, 0.8);
+  }
+}
+.winner-glow {
+  animation: winnerGlow 0.9s ease-in-out infinite;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-up {
+  animation: fadeUp 0.3s ease-out both;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deal-in,
+  .flip-in,
+  .place-down,
+  .banner-pop,
+  .fade-up {
+    animation: none;
+  }
+  .winner-glow {
+    animation: none;
+    box-shadow: 0 0 0 2px var(--accent-bright);
+  }
+}
